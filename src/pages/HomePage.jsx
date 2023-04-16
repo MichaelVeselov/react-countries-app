@@ -41,11 +41,11 @@ export const HomePage = (props) => {
 
     if (search) {
       data = data.filter((country) =>
-        country.name.toLowerCase().includes(search.toLowerCase())
+        country.name.common.toLowerCase().includes(search.toLowerCase())
       );
     }
 
-    const sortedData = orderBy(data, ['name'], ['asc']);
+    const sortedData = orderBy(data, ['name.common'], ['asc']);
 
     setFilteredCountries(sortedData);
   };
@@ -57,7 +57,7 @@ export const HomePage = (props) => {
         {filteredCountries.map((country) => {
           const countryInfo = {
             img: country.flags.png,
-            name: country.name,
+            name: country.name.common,
             info: [
               {
                 title: 'Population',
@@ -69,16 +69,16 @@ export const HomePage = (props) => {
               },
               {
                 title: 'Capital',
-                description: country.capital,
+                description: country.capital[0],
               },
             ],
           };
           return (
             <Card
-              key={country.name}
+              key={country.name.common}
               {...countryInfo}
               onClick={() => {
-                navigate(`/country/${country.name}`);
+                navigate(`/country/${country.name.common}`);
               }}
             ></Card>
           );

@@ -21,12 +21,48 @@ export const DetailsPage = () => {
     });
   }, [name]);
 
-  return (
-    <div>
-      <Button onClick={() => navigate(-1)}>
-        <IoArrowBack /> Back
-      </Button>
-      {country && <Info {...country} />}
-    </div>
-  );
+  if (country) {
+    const countryInfo = {
+      name: country?.name.common,
+
+      nativeNames: Object.keys(country?.name.nativeName).map((key) => [
+        key,
+        country.name.nativeName[key].common,
+      ]),
+
+      flag: country.flags.png || country.flags.svg,
+      flagDescription: country.flags.alt,
+
+      capital: country.capital[0],
+
+      population: country.population.toLocaleString(),
+
+      region: country.region,
+
+      subregion: country.subregion,
+
+      topLevelDomains: country.tld,
+
+      currencies: Object.keys(country.currencies).map((key) => [
+        key,
+        country.currencies[key].name,
+      ]),
+
+      languages: Object.keys(country.languages).map((key) => [
+        key,
+        country.languages[key],
+      ]),
+
+      borders: country.borders,
+    };
+
+    return (
+      <div>
+        <Button onClick={() => navigate(-1)}>
+          <IoArrowBack /> Back
+        </Button>
+        <Info {...countryInfo} />
+      </div>
+    );
+  }
 };

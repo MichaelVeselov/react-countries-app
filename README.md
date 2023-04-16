@@ -1,18 +1,18 @@
 # Countries
 
-## Portfolio React App
+## Portfolio React App - [Demo](https://mve-react-countries.vercel.app/)
 
 ### REST Countries API with color theme switcher
 
-### REST Countries API - Version 2
+### REST Countries API - Version 3.1
 
-#### Users are be able to:
+#### Users are able to:
 
-- See all countries from the API on the homepage
-- Search for a country using an input field
-- Filter countries by region
-- Click on a country to see more detailed information on a separate page
-- Click through to the border countries on the detail page
-- Toggle the color scheme between light and dark mode (optional)
+- see all countries from the API on the homepage
+- search for a country using an input field
+- filter countries by region
+- click on a country to see more detailed information on a separate page
+- click through to the border countries on the detail page
+- toggle the color scheme between light and dark mode (optional)
 
-![Project](screenshot/countries.png 'Project')
+![Countries](screenshot/countries.png 'Countries')

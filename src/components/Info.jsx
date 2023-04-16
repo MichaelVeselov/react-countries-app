@@ -95,13 +95,14 @@ const Tag = styled.span`
 export const Info = (props) => {
   const {
     name,
-    nativeName,
+    nativeNames = [],
     flag,
+    flagDescription,
     capital,
     population,
     region,
     subregion,
-    topLevelDomain,
+    topLevelDomains = [],
     currencies = [],
     languages = [],
     borders = [],
@@ -115,20 +116,22 @@ export const Info = (props) => {
     if (borders.length)
       axios.get(filterByCode(borders)).then((response) => {
         const { data } = response;
-        setNeighbors(data.map((country) => country.name));
+        setNeighbors(data.map((country) => country.name.common));
       });
   }, [borders]);
 
   return (
     <Wrapper>
-      <InfoImage src={flag} alt={name} />
+      <InfoImage src={flag} alt={flagDescription} />
       <div>
         <InfoTitle>{name}</InfoTitle>
         <ListGroup>
           <List>
             <ListItem>
-              <b>Native Name: </b>
-              {nativeName}
+              <b>Native Names: </b>
+              {nativeNames.map(([language, name]) => (
+                <span key={language}>'{name}', </span>
+              ))}
             </ListItem>
             <ListItem>
               <b>Population: </b>
@@ -149,21 +152,21 @@ export const Info = (props) => {
           </List>
           <List>
             <ListItem>
-              <b>Top Level Domain: </b>
-              {topLevelDomain.map((domain) => (
-                <span key={domain}>{domain} </span>
+              <b>Top Level Domains: </b>
+              {topLevelDomains.map((domain) => (
+                <span key={domain}>'{domain}', </span>
               ))}
             </ListItem>
             <ListItem>
               <b>Currency: </b>
-              {currencies.map((currency) => (
-                <span key={currency.code}>{currency.name} </span>
+              {currencies.map(([code, currency]) => (
+                <span key={code}>'{currency}', </span>
               ))}
             </ListItem>
             <ListItem>
               <b>Languages: </b>
-              {languages.map((language) => (
-                <span key={language.name}>{language.name} </span>
+              {languages.map(([language, name]) => (
+                <span key={language}>'{name}', </span>
               ))}
             </ListItem>
           </List>
