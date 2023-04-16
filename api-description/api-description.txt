@@ -1,0 +1,34 @@
+const BASE_URL = 'https://restcountries.com/v3.1/';
+
+const ALL_COUNTRIES = `${BASE_URL}all?fields=name,capital,flags,population,region`;
+
+const searchByCountry = (name) => `${BASE_URL}name/${name}`;
+
+const filterByCode = (codes) => `${BASE_URL}alpha?codes=${codes.join(',')}`;
+
+For all countries:
+ name - country.name.common
+ flag - country.flags.png
+ population - country.population
+ region - country.region
+ capital - country.capital[0]
+
+ For one country:
+ name - country[0].name.common
+ nativeNames - Object.keys(country[0].name.nativeName).map(
+    (key) => country[0].name.nativeName[key].common
+  ) //Array!!!
+ flag - country[0].flags.png || country[0].flags.svg
+ flagDescription - country[0].flags.alt
+ capital - country[0].capital[0]
+ population - country[0].population.toLocaleString()
+ region - country[0].region
+ subregion - country[0].subregion
+ topLevelDomains - country[0].tld //Array!!!
+ currencies - Object.keys(country[0].currencies).map(
+    (key) => country[0].currencies[key].name
+  )//Array!!!
+languages - Object.keys(country[0].languages).map(
+    (key) => country[0].languages[key]
+  )//Array!!!
+borders - country[0].borders //Array!!! + setNeighbors(data.map((country) => country.name.common))!!
